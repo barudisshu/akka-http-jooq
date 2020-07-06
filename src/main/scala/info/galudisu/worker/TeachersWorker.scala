@@ -2,11 +2,11 @@ package info.galudisu.worker
 
 import akka.actor.typed.scaladsl.Behaviors
 import akka.actor.typed.{ActorRef, Behavior}
-import info.galudisu.{Command, DbExecAsyncFailure, DbExecAsyncSuccess, DbExecAsyncWrappedResult}
 import info.galudisu.common.TeachersCreateResponse
-import info.galudisu.datasource.DataSourceProtocol.{DSLContextResult, GetDSLContext}
+import info.galudisu.datasource.DataSourceProtocol._
 import info.galudisu.model.tables.records.TeachersRecord
 import info.galudisu.repository.TeacherRepository
+import info.galudisu._
 
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
@@ -46,7 +46,7 @@ object TeachersWorker {
           Behaviors.same
         case DbExecAsyncWrappedResult(result, replyTo) =>
           replyTo ! result
-          Behaviors.same
+          Behaviors.stopped
       }
   }
 }
