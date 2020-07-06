@@ -14,12 +14,12 @@
              - org.jooq.codegen.JavaGenerator
              - org.jooq.codegen.ScalaGenerator
              Defaults to org.jooq.codegen.JavaGenerator -->
-        <name>org.jooq.codegen.JavaGenerator</name>
+        <name>org.jooq.codegen.ScalaGenerator</name>
 
         <database>
             <!-- The database type. The format here is:
                  org.jooq.meta.[database].[database]Database -->
-            <name>org.jooq.codegen.ScalaGenerator</name>
+            <name>org.jooq.meta.mysql.MySQLDatabase</name>
 
             <!-- The database schema (or in the absence of schema support, in your RDBMS this
                  can be the owner, user, database name) to be generated -->

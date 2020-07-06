@@ -15,6 +15,8 @@ lazy val scalaLoggingVersion    = "3.7.2"
 lazy val chillVersion           = "0.9.5"
 lazy val slf4jVersion           = "1.7.25"
 lazy val akkaHttpVersion        = "10.1.12"
+lazy val circeVersion           = "1.31.0"
+lazy val akkaHttpCorsVersion    = "0.4.3"
 lazy val akkaVersion            = "2.6.6"
 lazy val persistenceVersion     = "1.0.1"
 lazy val mysqlVersion           = "8.0.13"
@@ -80,6 +82,7 @@ libraryDependencies ++= {
     "org.scala-lang.modules"     %% "scala-java8-compat"          % scalaJavaCompatVersion,
     "com.typesafe.akka"          %% "akka-http"                   % akkaHttpVersion,
     "com.typesafe.akka"          %% "akka-http-spray-json"        % akkaHttpVersion,
+    "ch.megard"                  %% "akka-http-cors"              % akkaHttpCorsVersion,
     "com.typesafe.akka"          %% "akka-cluster-typed"          % akkaVersion,
     "com.typesafe.akka"          %% "akka-cluster-sharding-typed" % akkaVersion,
     "com.typesafe.akka"          %% "akka-stream-typed"           % akkaVersion,

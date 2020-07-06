@@ -1,3 +1,3 @@
 package info.galudisu
 
-trait Response
+trait Response extends Command

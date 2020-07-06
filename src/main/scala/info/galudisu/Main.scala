@@ -7,11 +7,14 @@ import akka.actor.typed.{ActorSystem, SupervisorStrategy}
 import akka.cluster.ClusterEvent
 import akka.cluster.typed._
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.server.Route
 import akka.{actor => classic}
 import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.{HikariConfig, HikariDataSource}
 import info.galudisu.datasource.MySQLDataSource
+import info.galudisu.route.TeachersRoute
+import info.galudisu.service.TeachersService
+import ch.megard.akka.http.cors.scaladsl.CorsDirectives._
 
 import scala.concurrent.ExecutionContextExecutor
 
@@ -53,8 +56,6 @@ object Main extends App {
         "Started [" + context.system + "], cluster.selfAddress = " + cluster.selfMember.address + ")"
       )
 
-      Http().bindAndHandle(complete("Hello world"), "0.0.0.0", 8080)
-
       // Create an actor that handles cluster domain events
       val listener = context.spawn(
         Behaviors.receive[ClusterEvent.MemberEvent]((ctx, event) => {
@@ -63,10 +64,7 @@ object Main extends App {
         }),
         "listener"
       )
-      cluster.subscriptions ! Subscribe(
-        listener,
-        classOf[ClusterEvent.MemberEvent]
-      )
+      cluster.subscriptions ! Subscribe(listener, classOf[ClusterEvent.MemberEvent])
 
       // 监督机制，确保数据准确。忽略失败。继续处理下一条
       val mySQLDataSource = context
@@ -74,6 +72,12 @@ object Main extends App {
                  .supervise(MySQLDataSource(dataSource))
                  .onFailure[Exception](SupervisorStrategy.resume),
                MySQLDataSource.Name)
+
+      val teachersService = new TeachersService(mySQLDataSource, context.system)
+
+      val route: Route = cors()(new TeachersRoute(teachersService).route)
+
+      Http().bindAndHandle(route, "0.0.0.0", 8080)
 
       Behaviors.empty
     },
