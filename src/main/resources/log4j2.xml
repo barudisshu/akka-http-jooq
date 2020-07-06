@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF" monitorInterval="1800">
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <ThresholdFilter level="TRACE" onMatch="ACCEPT"/>
+            <PatternLayout
+                    pattern="[%-5level %date{HH:mm:ss.SSS}] %msg%n%throwable"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <logger name="org.jooq.tools.LoggerListener" level="DEBUG"/>
+        <logger name="org.jooq" level="DEBUG"/>
+        <logger name="com.cplier.hourse" level="DEBUG" />
+        <logger name="org.quartz" level="OFF" />
+        <logger name="com.typesafe.akka.extension" level="OFF" />
+        <Root level="INFO">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

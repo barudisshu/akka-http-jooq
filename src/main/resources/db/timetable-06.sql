@@ -1,0 +1,65 @@
+DROP DATABASE IF EXISTS `timetable`;
+CREATE DATABASE IF NOT EXISTS `timetable` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `timetable`;
+
+DROP TABLE IF EXISTS `classrooms`;
+CREATE TABLE IF NOT EXISTS `classrooms`
+(
+    `id`          int(11)   NOT NULL AUTO_INCREMENT,
+    `lib`         varchar(64)        DEFAULT NULL,
+    `max`         int(11)            DEFAULT NULL,
+    `create_time` timestamp not null default current_timestamp,
+    `modify_time` timestamp not null default current_timestamp,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `lessons`;
+CREATE TABLE IF NOT EXISTS `lessons`
+(
+    `id`          int(11)   NOT NULL AUTO_INCREMENT,
+    `lib`         varchar(64)        DEFAULT NULL,
+    `create_time` timestamp not null default current_timestamp,
+    `modify_time` timestamp not null default current_timestamp,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `teachers`;
+CREATE TABLE IF NOT EXISTS `teachers`
+(
+    `id`          int(11)   NOT NULL AUTO_INCREMENT,
+    `firstName`   varchar(64)        DEFAULT NULL,
+    `lastName`    varchar(64)        DEFAULT NULL,
+    `create_time` timestamp not null default current_timestamp,
+    `modify_time` timestamp not null default current_timestamp,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `plans`;
+CREATE TABLE IF NOT EXISTS `plans`
+(
+    `id`           int(11)   NOT NULL AUTO_INCREMENT,
+    `teacher_id`   int(11)   NOT NULL,
+    `lesson_id`    int(11)   NOT NULL,
+    `classroom_id` int(11)   NOT NULL,
+    `start`        timestamp NULL     DEFAULT NULL,
+    `end`          timestamp NULL     DEFAULT NULL,
+    `create_time`  timestamp not null default current_timestamp,
+    `modify_time`  timestamp not null default current_timestamp,
+    PRIMARY KEY (`id`),
+    key `plans_teacher_id` (`teacher_id`),
+    key `plans_lesson_id` (`lesson_id`),
+    key `plans_classroom_id` (`classroom_id`),
+    constraint `plans_teacher_id` foreign key (`teacher_id`) references `teachers` (`id`) on delete cascade on update cascade,
+    constraint `plans_lesson_id` foreign key (`lesson_id`) references `lessons` (`id`) on delete cascade on update cascade,
+    constraint `plans_classroom_id` foreign key (`classroom_id`) references `classrooms` (`id`) on delete cascade on update cascade
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
