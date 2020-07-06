@@ -10,9 +10,7 @@
     <Loggers>
         <logger name="org.jooq.tools.LoggerListener" level="DEBUG"/>
         <logger name="org.jooq" level="DEBUG"/>
-        <logger name="com.cplier.hourse" level="DEBUG" />
-        <logger name="org.quartz" level="OFF" />
-        <logger name="com.typesafe.akka.extension" level="OFF" />
+        <logger name="info.galudisu" level="DEBUG"/>
         <Root level="INFO">
             <AppenderRef ref="STDOUT"/>
         </Root>

@@ -38,7 +38,7 @@
 
         <target>
             <!-- The destination package of your generated classes (within the destination directory) -->
-            <packageName>com.cplier.hourse.model</packageName>
+            <packageName>info.galudisu.model</packageName>
 
             <!-- The destination directory of your generated classes. Using Maven directory layout here -->
             <directory>src/main/generated</directory>

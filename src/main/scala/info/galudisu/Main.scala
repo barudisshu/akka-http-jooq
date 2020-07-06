@@ -6,6 +6,9 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.actor.typed.{ActorSystem, SupervisorStrategy}
 import akka.cluster.ClusterEvent
 import akka.cluster.typed._
+import akka.http.scaladsl.Http
+import akka.http.scaladsl.server.Directives._
+import akka.{actor => classic}
 import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.{HikariConfig, HikariDataSource}
 import info.galudisu.datasource.MySQLDataSource
@@ -41,7 +44,16 @@ object Main extends App {
 
   ActorSystem[Nothing](
     Behaviors.setup[Nothing] { context =>
-      implicit val ec: ExecutionContextExecutor = context.system.executionContext
+      import akka.actor.typed.scaladsl.adapter._
+      implicit val classicSystem: classic.ActorSystem = context.system.toClassic
+      implicit val ec: ExecutionContextExecutor       = context.system.executionContext
+
+      val cluster = Cluster(context.system)
+      context.log.info(
+        "Started [" + context.system + "], cluster.selfAddress = " + cluster.selfMember.address + ")"
+      )
+
+      Http().bindAndHandle(complete("Hello world"), "0.0.0.0", 8080)
 
       // Create an actor that handles cluster domain events
       val listener = context.spawn(
@@ -51,7 +63,7 @@ object Main extends App {
         }),
         "listener"
       )
-      Cluster(context.system).subscriptions ! Subscribe(
+      cluster.subscriptions ! Subscribe(
         listener,
         classOf[ClusterEvent.MemberEvent]
       )

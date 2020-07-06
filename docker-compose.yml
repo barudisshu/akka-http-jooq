@@ -1,8 +1,8 @@
 version: '2'
 services:
   seed:
-    container_name: cplier-hourse_seed_1
-    image: cplier/cplier-hourse:latest
+    container_name: akka-http-jooq_seed_1
+    image: galudisu/akka-http-jooq:latest
     ports:
       - '1600:1600'
     environment:
@@ -10,8 +10,8 @@ services:
       CLUSTER_IP: seed
       SEED_PORT_1600_TCP_ADDR: seed
   c1:
-    container_name: cplier-hourse_c1
-    image: cplier/cplier-hourse:latest
+    container_name: akka-http-jooq_c1
+    image: galudisu/akka-http-jooq:latest
     ports:
       - '1601:1601'
     environment:
@@ -19,8 +19,8 @@ services:
       CLUSTER_IP: c1
       SEED_PORT_1600_TCP_ADDR: seed
   c2:
-    container_name: cplier-hourse_c2
-    image: cplier/cplier-hourse:latest
+    container_name: akka-http-jooq_c2
+    image: galudisu/akka-http-jooq:latest
     ports:
       - '1602:1602'
     environment:
