@@ -75,8 +75,6 @@ dockerCommands := dockerCommands.value.flatMap {
   case other                => List(other)
 }
 
-wartremoverWarnings in (Compile, compile) ++= Warts.allBut(Wart.Throw)
-
 libraryDependencies ++= {
   Seq(
     "org.scala-lang.modules"     %% "scala-java8-compat"          % scalaJavaCompatVersion,
