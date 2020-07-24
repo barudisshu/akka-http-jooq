@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS `timetable`;
-CREATE DATABASE IF NOT EXISTS `timetable` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+CREATE DATABASE IF NOT EXISTS `timetable` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `timetable`;
 
 DROP TABLE IF EXISTS `classrooms`;
@@ -12,8 +12,7 @@ CREATE TABLE IF NOT EXISTS `classrooms`
     `modify_time` timestamp   not null default current_timestamp,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
+  DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE IF NOT EXISTS `lessons`
