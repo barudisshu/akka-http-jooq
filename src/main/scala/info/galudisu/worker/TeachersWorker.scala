@@ -11,7 +11,6 @@ import info.galudisu._
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 
-
 object TeachersWorker {
 
   final case class InsertTeacher(teachersRecord: TeachersRecord,
@@ -36,11 +35,15 @@ object TeachersWorker {
           mysqlDataSource ! GetDSLContext(context.self)
           Behaviors.same
         case DSLContextResult(dsl) =>
-          val repository = new TeacherRepository(dsl)
+          val repository   = new TeacherRepository(dsl)
           val futureRecord = repository.insertOne(tmpRecord.get)
           context.pipeToSelf(futureRecord) {
-            case Failure(_) => DbExecAsyncWrappedResult(DbExecAsyncFailure[TeachersCreateResponse](tmpTargetReply.get), tmpReplyTo.get)
-            case Success(v) => DbExecAsyncWrappedResult(DbExecAsyncSuccess[TeachersRecord, TeachersCreateResponse](v, tmpTargetReply.get), tmpReplyTo.get)
+            case Failure(_) =>
+              DbExecAsyncWrappedResult(DbExecAsyncFailure[TeachersCreateResponse](tmpTargetReply.get), tmpReplyTo.get)
+            case Success(v) =>
+              DbExecAsyncWrappedResult(DbExecAsyncSuccess[TeachersRecord, TeachersCreateResponse](v,
+                                                                                                  tmpTargetReply.get),
+                                       tmpReplyTo.get)
 
           }
           Behaviors.same
