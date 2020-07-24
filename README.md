@@ -1,7 +1,7 @@
 Akka Http Jooq
 ==========
 
-[![Travis](https://travis-ci.org/barudisshu/akka-http-jooq.svg?branch=master)](https://travis-ci.org/barudisshu/akka-http-jooq/)
+[![Travis](https://travis-ci.org/barudisshu/akka-http-jooq.svg?branch=master)](https://travis-ci.org/barudisshu/akka-http-jooq/) [![codecov](https://codecov.io/gh/barudisshu/akka-http-jooq/branch/master/graph/badge.svg)](https://codecov.io/gh/barudisshu/akka-http-jooq)
 
 ## 基础建设
 
