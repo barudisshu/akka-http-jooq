@@ -5,7 +5,7 @@
         <driver>com.mysql.cj.jdbc.Driver</driver>
         <url>jdbc:mysql://localhost/timetable?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</url>
         <user>root</user>
-        <password>root</password>
+        <password></password>
     </jdbc>
 
     <generator>
