@@ -36,6 +36,7 @@ before_script:
   - sudo mysql -e 'USE `timetable`;update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;'
   - sudo mysql_upgrade -u root -proot
   - sudo service mysql restart
+  - sudo mysql -u root --password="root" < src/main/resources/db/timetable-06.sql
 
 script:
   - sbt generateJOOQ
