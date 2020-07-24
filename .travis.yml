@@ -34,7 +34,6 @@ addons:
 env:
   global:
     - TRAVIS=true
-    - CODECOV_TOKEN=e9c42dde-1f5b-4aa4-a641-84136f6f4e23
 
 before_script:
   - sudo mysql -e 'CREATE DATABASE `timetable`;'
@@ -48,4 +47,3 @@ script:
 
 after_success:
   - sbt coveralls
-  - bash <(curl -s https://codecov.io/bash)
