@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS `timetable`;
-CREATE DATABASE IF NOT EXISTS `timetable` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE IF NOT EXISTS `timetable`;
 USE `timetable`;
 
 DROP TABLE IF EXISTS `classrooms`;
