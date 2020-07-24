@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS `timetable`;
-CREATE DATABASE IF NOT EXISTS `timetable` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+CREATE DATABASE IF NOT EXISTS `timetable`;
 USE `timetable`;
 
 DROP TABLE IF EXISTS `classrooms`;
@@ -12,8 +12,7 @@ CREATE TABLE IF NOT EXISTS `classrooms`
     `modify_time` timestamp   not null default current_timestamp,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
+  DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE IF NOT EXISTS `lessons`
@@ -24,8 +23,7 @@ CREATE TABLE IF NOT EXISTS `lessons`
     `modify_time` timestamp   not null default current_timestamp,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
+  DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE IF NOT EXISTS `teachers`
@@ -37,8 +35,7 @@ CREATE TABLE IF NOT EXISTS `teachers`
     `modify_time` timestamp   not null default current_timestamp,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
+  DEFAULT CHARSET = utf8mb4;
 
 
 DROP TABLE IF EXISTS `plans`;
@@ -60,6 +57,5 @@ CREATE TABLE IF NOT EXISTS `plans`
     constraint `plans_lesson_id` foreign key (`lesson_id`) references `lessons` (`id`) on delete cascade on update cascade,
     constraint `plans_classroom_id` foreign key (`classroom_id`) references `classrooms` (`id`) on delete cascade on update cascade
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
+  DEFAULT CHARSET = utf8mb4;
 
