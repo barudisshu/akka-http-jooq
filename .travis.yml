@@ -27,7 +27,7 @@ services:
 addons:
   apt:
     sources:
-      - mysql-5.7-trusty
+      - mysql-8.0-trusty
     packages:
       - mysql-server
 
@@ -48,3 +48,4 @@ script:
 
 after_success:
   - sbt coveralls
+  - bash <(curl -s https://codecov.io/bash)
